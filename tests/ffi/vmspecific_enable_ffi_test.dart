@@ -6,16 +6,18 @@
 //
 // VMOptions=--enable-ffi=false
 
-// Formatting can break multitests, so don't format them.
-// dart format off
+import 'dart:io';
+import 'dart:isolate';
 
-import 'dart:ffi'; //# 01: compile-time error
+import 'package:expect/expect.dart';
 
-import 'package:ffi/ffi.dart'; //# 01: compile-time error
-
-void main() {
-  Pointer<Int8> p = //# 01: compile-time error
-      calloc(); //# 01: compile-time error
-  print(p.address); //# 01: compile-time error
-  calloc.free(p); //# 01: compile-time error
+void main() async {
+  final uri = Platform.script.resolve('vmspecific_enable_ffi_test_helper.dart');
+  try {
+    await Isolate.spawnUri(uri, [], null);
+    Expect.fail("Should have failed to spawn isolate importing dart:ffi");
+  } catch (e) {
+    Expect.type<IsolateSpawnException>(e);
+    Expect.contains("import of dart:ffi is not supported", e.toString());
+  }
 }
