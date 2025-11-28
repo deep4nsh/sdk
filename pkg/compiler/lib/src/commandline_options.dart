@@ -14,6 +14,8 @@ class Flags {
 
   static const String allowMockCompilation = '--allow-mock-compilation';
   static const String allowNativeExtensions = '--allow-native-extensions';
+  static const String allowNativeCoreLibraryImports =
+      '--allow-native-core-library-imports';
   static const String disableInlining = '--disable-inlining';
   static const String disableProgramSplit = '--disable-program-split';
   static const String disableDiagnosticColors = '--disable-diagnostic-colors';

@@ -138,6 +138,10 @@ class CompilerOptions {
   /// it refers to a constructor or variable initializer that is not available).
   bool errorOnUnevaluatedConstant = false;
 
+  /// Whether to allow importing `dart:` libraries that are normally restricted
+  /// (e.g. `dart:_internal`).
+  bool allowNativeCoreLibraryImports = false;
+
   /// The target platform that will consume the compiled code.
   ///
   /// Used to provide platform-specific details to the compiler like:
@@ -333,6 +337,9 @@ class CompilerOptions {
     }
     if (!equalMaps(environmentDefines, other.environmentDefines)) return false;
     if (errorOnUnevaluatedConstant != other.errorOnUnevaluatedConstant) {
+      return false;
+    }
+    if (allowNativeCoreLibraryImports != other.allowNativeCoreLibraryImports) {
       return false;
     }
     if (target != other.target) {

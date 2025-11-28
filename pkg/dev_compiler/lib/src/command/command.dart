@@ -293,6 +293,7 @@ Future<CompilerResult> _compile(
       fileSystem: fileSystem,
       explicitExperimentalFlags: explicitExperimentalFlags,
       environmentDefines: declaredVariables,
+      allowNativeCoreLibraryImports: options.allowNativeCoreLibraryImports,
     );
     result = await fe.compile(compilerState, inputs, diagnosticMessageHandler);
   } else {

@@ -398,6 +398,10 @@ class CompilerOptions implements DiagnosticOptions {
   /// dart:html for unit testing purposes.
   bool allowMockCompilation = false;
 
+  /// Whether we allow importing `dart:` libraries that are normally restricted
+  /// (e.g. `dart:_internal`).
+  bool allowNativeCoreLibraryImports = false;
+
   /// Sets a combination of flags for benchmarking 'production' mode.
   bool benchmarkingProduction = false;
 

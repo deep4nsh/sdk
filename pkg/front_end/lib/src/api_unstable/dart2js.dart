@@ -103,6 +103,7 @@ InitializedCompilerState initializeCompiler(
   bool verify = false,
   Set<InvocationMode> invocationModes = const <InvocationMode>{},
   Verbosity verbosity = Verbosity.all,
+  bool allowNativeCoreLibraryImports = false,
 }) {
   additionalDills.sort((a, b) => a.toString().compareTo(b.toString()));
 
@@ -134,7 +135,10 @@ InitializedCompilerState initializeCompiler(
     ..errorOnUnevaluatedConstant = environmentDefines != null ? true : false
     ..verify = verify
     ..invocationModes = invocationModes
-    ..verbosity = verbosity;
+    ..verify = verify
+    ..invocationModes = invocationModes
+    ..verbosity = verbosity
+    ..allowNativeCoreLibraryImports = allowNativeCoreLibraryImports;
 
   ProcessedOptions processedOpts = new ProcessedOptions(options: options);
 

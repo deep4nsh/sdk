@@ -303,6 +303,7 @@ Future<_LoadFromSourceResult> _loadFromSource(
     environmentDefines: environment,
     invocationModes: options.cfeInvocationModes,
     verbosity: verbosity,
+    allowNativeCoreLibraryImports: options.allowNativeCoreLibraryImports,
   );
   ir.Component? component = await fe.compile(
     initializedCompilerState,

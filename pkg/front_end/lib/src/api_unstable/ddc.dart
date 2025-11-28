@@ -110,6 +110,7 @@ InitializedCompilerState initializeCompiler(
   FileSystem? fileSystem,
   Map<ExperimentalFlag, bool>? explicitExperimentalFlags,
   Map<String, String>? environmentDefines,
+  bool allowNativeCoreLibraryImports = false,
 }) {
   additionalDills.sort((a, b) => a.toString().compareTo(b.toString()));
 
@@ -137,7 +138,8 @@ InitializedCompilerState initializeCompiler(
     ..librariesSpecificationUri = librariesSpecificationUri
     ..target = target
     ..fileSystem = fileSystem ?? StandardFileSystem.instance
-    ..environmentDefines = environmentDefines;
+    ..environmentDefines = environmentDefines
+    ..allowNativeCoreLibraryImports = allowNativeCoreLibraryImports;
   if (explicitExperimentalFlags != null) {
     options.explicitExperimentalFlags = explicitExperimentalFlags;
   }

@@ -165,6 +165,7 @@ Future<api.CompilationResult> compile(
   Map<String, String> environment = <String, String>{};
   FeatureOptions features = FeatureOptions();
   String? invoker;
+  bool allowNativeCoreLibraryImports = false;
 
   void passThrough(String argument) => options.add(argument);
   void ignoreOption(String argument) {}
@@ -526,6 +527,9 @@ Future<api.CompilationResult> compile(
     _OneOption('--enable-null-aware-operators', ignoreOption),
     _OneOption('--enable-enum', ignoreOption),
     _OneOption(Flags.allowNativeExtensions, setAllowNativeExtensions),
+    _OneOption(Flags.allowNativeCoreLibraryImports, (_) {
+      allowNativeCoreLibraryImports = true;
+    }),
     _OneOption(Flags.generateCodeWithCompileTimeErrors, ignoreOption),
     _OneOption(Flags.useMultiSourceInfo, passThrough),
     _OneOption(Flags.useNewSourceInfo, passThrough),
@@ -705,7 +709,8 @@ Future<api.CompilationResult> compile(
         ..packageConfig = packageConfig
         ..environment = environment
         ..kernelInitializedCompilerState = kernelInitializedCompilerState
-        ..optimizationLevel = optimizationLevel;
+        ..optimizationLevel = optimizationLevel
+        ..allowNativeCoreLibraryImports = allowNativeCoreLibraryImports;
 
   final errorMessage = compilerOptions.validateStage();
   if (errorMessage != null) {

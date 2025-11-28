@@ -100,6 +100,8 @@ class Options {
   /// Whether the compiler is generating a dynamic module.
   final bool dynamicModule;
 
+  final bool allowNativeCoreLibraryImports;
+
   Options({
     this.sourceMap = true,
     this.inlineSourceMap = false,
@@ -120,6 +122,7 @@ class Options {
     this.experiments = const {},
     this.canaryFeatures = false,
     this.dynamicModule = false,
+    this.allowNativeCoreLibraryImports = false,
   }) : emitLibraryBundle =
            canaryFeatures &&
            moduleFormats.length == 1 &&
@@ -142,6 +145,9 @@ class Options {
         summaryModules: _parseCustomSummaryModules(args.multiOption('summary')),
         nonHotReloadablePackages: Set.from(
           args.multiOption('non-hot-reloadable-package'),
+        ),
+        allowNativeCoreLibraryImports: args.flag(
+          'allow-native-core-library-imports',
         ),
         moduleFormats: parseModuleFormatOption(args),
         moduleName: _getModuleName(args),
@@ -403,6 +409,12 @@ class Options {
       );
     Options.addArguments(argParser);
     return argParser;
+      ..addFlag(
+        'allow-native-core-library-imports',
+        help: 'Allow importing `dart:` libraries that are normally restricted.',
+        defaultsTo: false,
+        hide: true,
+      );
   }
 }
 
